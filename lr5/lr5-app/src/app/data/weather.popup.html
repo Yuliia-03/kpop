@@ -1,0 +1,27 @@
+<style>
+
+.border {
+  display: block;
+  border: 2px solid black ;
+
+  width: 400px;	
+  height: 350px;
+  border-radius: 15px;
+  text-align: center;
+  align-items: center;
+}
+
+</style>
+<div class="border">
+<h1 mat-dialog-title>{{data.city}}, {{data.country}}</h1>
+<div mat-dialog-content>
+  <p>Дата: {{data.applicable_date}}</p>
+  <p>Мінімальна температура: {{data.min_temp}}</p>
+  <p>Максимальна температура: {{data.max_temp}}</p>
+  <p>Середня температура: {{data.temp}}</p>
+  <p>Вологість: {{data.humidity}}</p>
+  <p>Видимість: {{data.visibility}}</p>
+  <p>Стан погоди: {{data.weather_state_name}}</p>
+  <p>Схід сонця: {{data.sun_rise}}</p>
+  <p>Захід сонця: {{data.sun_set}}</p>
+</div>

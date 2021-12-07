@@ -1,0 +1,10 @@
+
+<b>Масив чисел</b><br>
+<div *ngFor="let n of numbers; let i = index">
+  <input type="number" [(ngModel)]="n.value">
+  <button class="del" (click)="Delete(i)">Delete</button>
+</div>
+<br>
+<button class="add" (click)="Add()">Add number</button>
+
+<child-root [numberArray]="numbers"></child-root>

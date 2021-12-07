@@ -1,0 +1,75 @@
+<style>
+    table{
+    width: 100%;
+  }
+  table tr *{ text-align: center;}
+  button {
+    width: 50%;
+  }
+
+
+</style>
+  
+<div>
+  <button mat-raised-button style="background-color: rgb(223, 175, 175);" (click)="showChosen()">Улюблені</button>
+  <button mat-raised-button  style="background-color: rgb(223, 175, 175);" (click)="showAll()">Всі міста</button>
+  <hr style="color: rgb(230, 222, 222);">  
+  <div class="spinner-container" *ngIf="dataSource.loading$ | async">
+    <mat-progress-bar mode="determinate" [value]="getProgress()"></mat-progress-bar>
+  </div>
+  
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+  <ng-container matColumnDef="Selected" >
+    <th mat-header-cell *matHeaderCellDef style="background-color: rgb(241, 207, 207);">
+      <mat-checkbox  (change)="$event ? masterToggle() : null"
+                    [checked]="selection.hasValue() && isAllSelected()"
+                    [indeterminate]="selection.hasValue() && !isAllSelected()"
+                    [aria-label]="checkboxLabel()">
+      </mat-checkbox>
+    </th>
+    <td mat-cell *matCellDef="let row" style="background-color: rgb(240, 240, 240);">
+      <mat-checkbox  (click)="$event.stopPropagation()"
+                    (change)="$event ? selection.toggle(row) : null"
+                    [checked]="selection.isSelected(row)"
+                    [aria-label]="checkboxLabel(row)">
+      </mat-checkbox>
+    </td>
+  </ng-container>
+  
+    
+    <ng-container matColumnDef="City">
+      <th mat-header-cell *matHeaderCellDef style="background-color: rgb(241, 207, 207);"> Місто </th>
+      <td mat-cell *matCellDef="let element" style="background-color: rgb(240, 240, 240);"> {{element.title}} </td>
+    </ng-container>
+    
+    <ng-container matColumnDef="Humidity">
+      <th mat-header-cell *matHeaderCellDef style="background-color: rgb(241, 207, 207);"> Опади </th>
+      <td mat-cell *matCellDef="let element" style="background-color: rgb(240, 240, 240);"> {{element.consolidated_weather[0].humidity}} </td>
+    </ng-container>
+    
+    <ng-container matColumnDef="Temp">
+      <th mat-header-cell *matHeaderCellDef style="background-color: rgb(241, 207, 207);"> Середня температура </th>
+      <td mat-cell *matCellDef="let element" style="background-color: rgb(240, 240, 240);"> {{element.consolidated_weather[0].the_temp}} </td>
+    </ng-container>
+    
+    <ng-container matColumnDef="Wind_speed" >
+      <th mat-header-cell *matHeaderCellDef style="background-color: rgb(241, 207, 207);"> Швидкість вітру </th>
+      <td mat-cell *matCellDef="let element" style="background-color: rgb(240, 240, 240);"> {{element.consolidated_weather[0].wind_speed}} </td>
+    </ng-container>
+
+      
+
+    <ng-container matColumnDef="Details">
+      <th mat-header-cell *matHeaderCellDef style="background-color: rgb(241, 207, 207);"> Деталі </th>
+      <td mat-cell *matCellDef="let element" style="background-color: rgb(240, 240, 240);"> 
+        <button mat-raised-button style="background-color: rgb(241, 207, 207);"
+            (click)="openDialog()">Деталі</button> </td>
+    </ng-container>
+
+    <tr mat-header-row  *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row (click)="clickedRows.push(row);" *matRowDef="let row; columns: displayedColumns;"></tr>
+  
+  </table>
+</div>
+  

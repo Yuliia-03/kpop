@@ -1,0 +1,21 @@
+.add {
+  background-color: white;
+  color: black;
+  border: 2px solid #4CAF50;
+}
+
+.add:hover {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.del {
+  background-color: white;
+  color: black;
+  border: 2px solid #d35732;
+}
+
+.del:hover {
+  background-color: #d35732;
+  color: white;
+}
